@@ -1,0 +1,47 @@
+# WiFi Human Presence Detection -- configuration
+#
+# Sections currently validated by app/config/config_loader.py: serial, logging.
+# Remaining sections are placeholders for later phases (preprocessing,
+# features, model, dashboard, database) and are not yet enforced.
+
+receiver:
+  mode: "synthetic"      # "synthetic" or "serial"
+
+serial:
+  # Windows COM port the ESP32-S3's USB-UART bridge enumerates as.
+  # Find it in Device Manager -> Ports (COM & LPT) after plugging in the board.
+  port: "COM5"
+  baud_rate: 921600
+  reconnect_delay_s: 2.0
+  read_timeout_s: 1.0
+  
+logging:
+  level: "INFO"
+  log_dir: "logs"
+  log_filename: "app.log"
+  max_bytes: 5242880         # 5 MB
+  backup_count: 5
+
+# --- Placeholders for later phases, not yet consumed by any code ---
+
+preprocessing:
+  moving_average_window: 5
+  butterworth_order: 4
+  butterworth_cutoff_hz: 2.0
+  window_size_samples: 100
+  window_stride_samples: 50
+
+features:
+  fft_top_k_peaks: 3
+
+model:
+  input_dim: null            # set once feature vector size is finalized
+  hidden_units: [128, 64]
+  dropout_rate: 0.3
+  learning_rate: 0.001
+
+database:
+  path: "data/processed/presence.db"
+
+dashboard:
+  refresh_interval_s: 1.0

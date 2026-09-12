@@ -1,0 +1,39 @@
+menu "CSI Presence Detection"
+
+    config WIFI_SSID
+        string "WiFi SSID (router/AP to associate with for CSI beacon capture)"
+        default "2004"
+        help
+            The ESP32-S3 connects to this AP as a station. CSI is extracted
+            from beacon frames received from this AP -- no other traffic
+            source is needed for this phase.
+
+    config WIFI_PASSWORD
+        string "WiFi Password"
+        default ""
+
+    config WIFI_MAXIMUM_RETRY
+        int "Maximum connection retry attempts before giving up"
+        default 10
+
+    config CSI_UART_TX_GPIO
+        int "UART1 TX GPIO pin (to PC USB-UART bridge)"
+        default 17
+        help
+            Kept separate from UART0 (console/log output) so boot log text
+            never gets interleaved with the binary CSI frame stream.
+
+    config CSI_UART_RX_GPIO
+        int "UART1 RX GPIO pin"
+        default 18
+
+    config CSI_UART_BAUD_RATE
+        int "UART1 baud rate"
+        default 921600
+        help
+            921600 gives enough headroom for ~10 Hz CSI frames (HT40,
+            up to ~384 bytes CSI payload -> ~410 byte frame -> ~4.1 KB/s,
+            well under the ~90 KB/s this baud rate provides). Increase if
+            you later move to active-ping triggering at higher CSI rates.
+
+endmenu

@@ -1,0 +1,17 @@
+# Applied on first `idf.py set-target esp32s3` / `idf.py build` before a
+# full sdkconfig exists. Safe to delete once you've run menuconfig and
+# committed the generated sdkconfig, but keep these values if you do.
+
+CONFIG_IDF_TARGET="esp32s3"
+
+# CSI reporting must be explicitly enabled in the WiFi driver at build time.
+CONFIG_ESP32_WIFI_CSI_ENABLED=y
+
+# Station mode needs a reasonably sized RX buffer pool; default is usually
+# fine, bumped slightly for headroom under CSI callback load.
+CONFIG_ESP32_WIFI_DYNAMIC_RX_BUFFER_NUM=32
+
+# Log level: keep at INFO for bring-up. Drop to WARN once the link is
+# stable, since console UART0 log lines cost CPU time that competes with
+# the CSI-callback / uart_sender tasks for cycles.
+CONFIG_LOG_DEFAULT_LEVEL_INFO=y

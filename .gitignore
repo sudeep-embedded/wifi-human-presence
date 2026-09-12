@@ -1,0 +1,15 @@
+﻿.venv/
+__pycache__/
+*.pyc
+build/
+managed_components/
+dataset/
+*.npz
+*.mat
+*.csv
+*.pth
+*.pt
+*.bin
+*.elf
+*.map
+.vscode/

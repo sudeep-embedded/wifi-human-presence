@@ -1,0 +1,17 @@
+idf_component_register(
+    SRCS
+        "main.c"
+        "wifi_manager.c"
+        "csi_collector.c"
+        "uart_sender.c"
+        "csi_protocol.c"
+    INCLUDE_DIRS
+        "include"
+    REQUIRES
+    esp_wifi
+    esp_event
+    esp_netif
+    nvs_flash
+    esp_driver_usb_serial_jtag
+    esp_timer
+)

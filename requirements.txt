@@ -1,0 +1,6 @@
+# Phase 1 (firmware + receiver + parser) dependencies only.
+# preprocessing/features/model/dashboard requirements will be appended
+# in later phases.
+pyserial==3.5
+PyYAML==6.0.2
+pytest==8.3.3
